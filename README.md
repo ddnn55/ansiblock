@@ -1,5 +1,5 @@
 # ansiblock
-Dump stdin to bl.ocks.org, in glorious VGA color
+Dump stdin to [bl.ocks.org](http://bl.ocks.org), in glorious VGA color
 
 ## Usage
 
