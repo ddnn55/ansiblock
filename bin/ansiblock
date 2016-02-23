@@ -7,4 +7,8 @@ gist_id=`ansi2html <&0 | gist -f index.html | sed -n -e 's/^.*gist\.github\.com\
 # which is required for raw linking, as far as I know
 user=`curl -s -I "https://bl.ocks.org/$gist_id" | perl -n -e '/^Location: \/(.*)\/(.*)$/ && print "$1\n"'`
 
+if [ $user = "anonymous" ]; then
+  >&2 echo "Creating anonymous gist. Login with \`gist --login\` to create identified gist."
+fi
+
 echo "https://bl.ocks.org/$user/raw/$gist_id"
