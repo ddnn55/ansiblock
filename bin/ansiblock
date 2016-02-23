@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# transform stdin to html, create gist in bl.ocks.org format, get gist id
+gist_id=`ansi2html <&0 | gist -f index.html | sed -n -e 's/^.*gist\.github\.com\///p'`
+
+# query bl.ocks.org redirect to deduce GitHub username,
+# which is required for raw linking, as far as I know
+user=`curl -I "https://bl.ocks.org/$gist_id" | perl -n -e '/^Location: \/(.*)\/(.*)$/ && print "$1\n"'`
+
+echo "https://bl.ocks.org/$user/raw/$gist_id"
